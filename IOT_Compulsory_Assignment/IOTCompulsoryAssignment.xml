@@ -1,0 +1,78 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>WebApi</name>
+    </assembly>
+    <members>
+        <member name="M:WebApi.Controllers.v1._0.DroneController.Create(Entities.ApplicationEntities.Drone)">
+            <summary>
+            Creates a new Drone entity.
+            </summary>
+            <param name="entity"></param>
+            <returns></returns>
+        </member>
+        <member name="M:WebApi.Controllers.v1._0.DroneController.GetAll">
+            <summary>
+            Gets all Drones.
+            </summary>
+            <returns>List of all Drones</returns>
+        </member>
+        <member name="M:WebApi.Controllers.v1._0.DroneController.GetById(System.Int32)">
+            <summary>
+            Gets Drone entity by Id.
+            </summary>
+            <param name="id"></param>
+            <returns>Drone entity</returns>
+        </member>
+        <member name="M:WebApi.Controllers.v1._0.DroneController.Delete(System.Int32)">
+            <summary>
+            Deletes Drone entity based on Id.
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:WebApi.Controllers.v1._0.DroneController.Update(System.Int32,Entities.ApplicationEntities.Drone)">
+            <summary>
+            Updates the Drone entity based on Id.   
+            </summary>
+            <param name="id"></param>
+            <param name="entity"></param>
+            <returns></returns>
+        </member>
+        <member name="M:WebApi.Controllers.v1._0.OrderController.Create(Entities.ApplicationEntities.Order)">
+            <summary>
+            Creates a new Order entity.
+            </summary>
+            <param name="entity"></param>
+            <returns></returns>
+        </member>
+        <member name="M:WebApi.Controllers.v1._0.OrderController.GetAll">
+            <summary>
+            Gets all Orders.
+            </summary>
+            <returns>List of all Drones</returns>
+        </member>
+        <member name="M:WebApi.Controllers.v1._0.OrderController.GetById(System.Int32)">
+            <summary>
+            Gets Order entity by Id.
+            </summary>
+            <param name="id"></param>
+            <returns>Drone entity</returns>
+        </member>
+        <member name="M:WebApi.Controllers.v1._0.OrderController.Delete(System.Int32)">
+            <summary>
+            Deletes Order entity based on Id.
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:WebApi.Controllers.v1._0.OrderController.Update(System.Int32,Entities.ApplicationEntities.Order)">
+            <summary>
+            Updates the Order entity based on Id.   
+            </summary>
+            <param name="id"></param>
+            <param name="entity"></param>
+            <returns></returns>
+        </member>
+    </members>
+</doc>
