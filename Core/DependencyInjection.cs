@@ -14,7 +14,7 @@ namespace Application
         public static void AddApplication(this IServiceCollection services)
         {
             //Dependency injection for drone service
-            services.AddScoped<IService<Drone>, DroneService>();
+            services.AddScoped<IDroneService<Drone>, DroneService>();
 
             //Dependency injection for order service
             services.AddScoped<IService<Order>, OrderService>();

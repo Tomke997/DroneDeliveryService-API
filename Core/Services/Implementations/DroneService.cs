@@ -2,17 +2,26 @@
 using Entities.ApplicationEntities;
 using System;
 using System.Collections.Generic;
+using System.Net;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using infrastracture.Repositories.Interfaces;
+using MQTTnet;
+using MQTTnet.Client;
+using MQTTnet.Client.Connecting;
+using MQTTnet.Client.Options;
+using MQTTnet.Extensions.ManagedClient;
+using MQTTnet.Protocol;
+using Persistance.Repositories.Interfaces;
 
 namespace Application.Services.Implementations
 {
-    public class DroneService : IService<Drone>
+    public class DroneService : IDroneService<Drone>
     {
-        private readonly IRepository<Drone> _droneRepository;
+        private readonly IDroneRepository<Drone> _droneRepository;
 
-        public DroneService(IRepository<Drone> droneRepository)
+        public DroneService(IDroneRepository<Drone> droneRepository)
         {
             _droneRepository = droneRepository;
         }
@@ -70,6 +79,20 @@ namespace Application.Services.Implementations
             try
             {
                 return _droneRepository.Update(id, entity);
+            }
+            catch (Exception x)
+            {
+                throw new Exception(x.Message, x.InnerException);
+            }
+        }
+
+        public async Task<bool> SendMessageWithDirections(string message)
+        {
+            try
+            {
+                await _droneRepository.SendMessageWithDirections(message);
+
+                return false;
             }
             catch (Exception x)
             {

@@ -6,11 +6,15 @@ using MongoDB.Driver;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using MQTTnet;
+using MQTTnet.Client;
+using MQTTnet.Protocol;
+using Persistance.Repositories.Interfaces;
 
 namespace Persistance.Repositories.Implementation
 {
     [BsonIgnoreExtraElements]
-    class DroneRepository : IRepository<Drone>
+    class DroneRepository : IDroneRepository<Drone>
     {
         public readonly IApplicationContext _context;
 
@@ -74,6 +78,27 @@ namespace Persistance.Repositories.Implementation
             {
                 await _context.Drone.ReplaceOneAsync(d => d.DroneId == id, entity);
                 return entity;
+            }
+            catch (Exception x)
+            {
+                throw new Exception(x.Message, x.InnerException);
+            }
+        }
+
+        public async Task<bool> SendMessageWithDirections(string message)
+        {
+            try
+            {
+                var mqttClient = await _context.MqttClient;
+
+                    await mqttClient.PublishAsync(new MqttApplicationMessageBuilder()
+                        .WithTopic("drone/test")
+                        .WithPayload(message)
+                        .WithQualityOfServiceLevel(MqttQualityOfServiceLevel.ExactlyOnce)
+                        .WithRetainFlag(true)
+                        .Build());
+
+                    return true;
             }
             catch (Exception x)
             {

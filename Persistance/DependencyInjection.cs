@@ -6,6 +6,7 @@ using Persistance.Repositories.Implementation;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using Persistance.Repositories.Interfaces;
 
 namespace Persistance
 {
@@ -14,7 +15,7 @@ namespace Persistance
         public static void AddPersistance(this IServiceCollection services)
         {
             //Dependency injection for drone repository
-            services.AddScoped<IRepository<Drone>, DroneRepository>();
+            services.AddScoped<IDroneRepository<Drone>, DroneRepository>();
 
             //Dependency injection for drone repository
             services.AddScoped<IRepository<Order>, OrderRepository>();
