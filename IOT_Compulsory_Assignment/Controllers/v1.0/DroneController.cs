@@ -10,9 +10,9 @@ namespace WebApi.Controllers.v1._0
     [ApiVersion("1.0")]
     public class DroneController : BaseApiController
     {
-        private readonly IService<Drone> _droneService;
+        private readonly IDroneService<Drone> _droneService;
 
-        public DroneController(IService<Drone> droneService)
+        public DroneController(IDroneService<Drone> droneService)
         {
             _droneService = droneService;
         }
@@ -128,6 +128,25 @@ namespace WebApi.Controllers.v1._0
                 }
 
                 return Ok(updatedDrone);
+            }
+            catch (Exception x)
+            {
+                return BadRequest(x);
+            }
+        }
+
+        /// <summary>
+        /// Send direction message to the drone.
+        /// </summary>
+        /// <param name="message"></param>
+        /// <returns></returns>
+        [HttpPost("SendMessageToDrone")]
+        public async Task<IActionResult> SendMessageToDrone(string message)
+        {
+            try
+            {
+                await _droneService.SendMessageWithDirections(message);
+                return Ok("Message Sent");
             }
             catch (Exception x)
             {

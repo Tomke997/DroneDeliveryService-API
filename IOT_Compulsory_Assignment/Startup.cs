@@ -23,6 +23,7 @@ namespace IOT_Compulsory_Assignment
 {
     public class Startup
     {
+        readonly string MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
@@ -33,6 +34,16 @@ namespace IOT_Compulsory_Assignment
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+
+            services.AddCors(options =>
+            {
+                options.AddPolicy(name: MyAllowSpecificOrigins,
+                    builder =>
+                    {
+                        builder.WithOrigins("http://localhost:4200").AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod();
+                    });
+            });
+
             #region API Versioning
             // Add API Versioning to the Project
             services.AddApiVersioning(config =>
@@ -68,6 +79,14 @@ namespace IOT_Compulsory_Assignment
             services.AddSingleton<IApplicationContext, ApplicationContext>();
             #endregion
 
+            #region Mqtt
+            services.Configure<MqttBrokerSettings>(
+                Configuration.GetSection(nameof(MqttBrokerSettings)));
+
+            services.AddSingleton<IMqttBrokerSettings>(sp =>
+                sp.GetRequiredService<IOptions<MqttBrokerSettings>>().Value);
+            #endregion
+
             #region Dependeny Injection
             //Add dependency injection for the Application
             services.AddApplication();
@@ -91,6 +110,8 @@ namespace IOT_Compulsory_Assignment
             app.UseHttpsRedirection();
 
             app.UseRouting();
+
+            app.UseCors(MyAllowSpecificOrigins);
 
             app.UseAuthorization();
 

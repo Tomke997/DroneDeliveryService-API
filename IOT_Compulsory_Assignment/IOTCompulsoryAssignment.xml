@@ -39,6 +39,13 @@
             <param name="entity"></param>
             <returns></returns>
         </member>
+        <member name="M:WebApi.Controllers.v1._0.DroneController.SendMessageToDrone(System.String)">
+            <summary>
+            Send direction message to the drone.
+            </summary>
+            <param name="message"></param>
+            <returns></returns>
+        </member>
         <member name="M:WebApi.Controllers.v1._0.OrderController.Create(Entities.ApplicationEntities.Order)">
             <summary>
             Creates a new Order entity.

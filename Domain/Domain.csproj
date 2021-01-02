@@ -5,7 +5,9 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="M2Mqtt" Version="4.3.0" />
     <PackageReference Include="MongoDB.Driver" Version="2.11.4" />
+    <PackageReference Include="MQTTnet.Extensions.ManagedClient" Version="3.0.13" />
   </ItemGroup>
 
 </Project>
