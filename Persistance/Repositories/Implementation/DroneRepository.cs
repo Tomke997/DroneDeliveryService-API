@@ -105,5 +105,47 @@ namespace Persistance.Repositories.Implementation
                 throw new Exception(x.Message, x.InnerException);
             }
         }
+
+        public async Task<bool> SendMessageWithDirectionsRPi(string message)
+        {
+            try
+            {
+                var mqttClient = await _context.MqttClient;
+
+                await mqttClient.PublishAsync(new MqttApplicationMessageBuilder()
+                    .WithTopic("topic/manual_flight")
+                    .WithPayload(message)
+                    .WithQualityOfServiceLevel(MqttQualityOfServiceLevel.ExactlyOnce)
+                    .WithRetainFlag(true)
+                    .Build());
+
+                return true;
+            }
+            catch (Exception x)
+            {
+                throw new Exception(x.Message, x.InnerException);
+            }
+        }
+
+        public async Task<bool> SendMessageWithFlyToLatLongRPi(string message)
+        {
+            try
+            {
+                var mqttClient = await _context.MqttClient;
+
+                await mqttClient.PublishAsync(new MqttApplicationMessageBuilder()
+                    .WithTopic("topic/fly_to")
+                    .WithPayload(message)
+                    .WithQualityOfServiceLevel(MqttQualityOfServiceLevel.ExactlyOnce)
+                    .WithRetainFlag(true)
+                    .Build());
+
+                return true;
+            }
+            catch (Exception x)
+            {
+                throw new Exception(x.Message, x.InnerException);
+            }
+        }
     }
 }

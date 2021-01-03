@@ -99,5 +99,33 @@ namespace Application.Services.Implementations
                 throw new Exception(x.Message, x.InnerException);
             }
         }
+
+        public async Task<bool> SendMessageWithDirectionsRPi(string message)
+        {
+            try
+            {
+                await _droneRepository.SendMessageWithDirectionsRPi(message);
+
+                return false;
+            }
+            catch (Exception x)
+            {
+                throw new Exception(x.Message, x.InnerException);
+            }
+        }
+
+        public async Task<bool> SendMessageWithFlyToLatLongRPi(string message)
+        {
+            try
+            {
+                await _droneRepository.SendMessageWithFlyToLatLongRPi(message);
+
+                return false;
+            }
+            catch (Exception x)
+            {
+                throw new Exception(x.Message, x.InnerException);
+            }
+        }
     }
 }

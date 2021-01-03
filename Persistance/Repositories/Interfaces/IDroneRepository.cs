@@ -9,5 +9,9 @@ namespace Persistance.Repositories.Interfaces
     public interface IDroneRepository<T> : IRepository<T>
     {
         Task<bool> SendMessageWithDirections(string message);
+
+        Task<bool> SendMessageWithDirectionsRPi(string message);
+
+        Task<bool> SendMessageWithFlyToLatLongRPi(string message);
     }
 }

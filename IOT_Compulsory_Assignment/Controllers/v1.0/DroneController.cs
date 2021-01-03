@@ -153,5 +153,46 @@ namespace WebApi.Controllers.v1._0
                 return BadRequest(x);
             }
         }
+
+        /// <summary>
+        /// Send direction message to the Raspberry Pi drone.
+        /// Example message: {"Manual": "true", "Input": "w"}
+        /// Remember to send a {"Manual": "false", "Input": "w"}, when done sending input.
+        /// </summary>
+        /// <param name="message"></param>
+        /// <returns></returns>
+        [HttpPost("SendMessageToDroneWithDirectionsRPi")]
+        public async Task<IActionResult> SendMessageWithDirectionsRPi(string message)
+        {
+            try
+            {
+                await _droneService.SendMessageWithDirectionsRPi(message);
+                return Ok("Message Sent to Raspberry Pi");
+            }
+            catch (Exception x)
+            {
+                return BadRequest(x);
+            }
+        }
+
+        /// <summary>
+        /// Send latitude and longitude message to the Raspberry Pi drone to fly to.
+        /// Example message: {"ToLat": 55.421740, "ToLong": 9.302740}
+        /// </summary>
+        /// <param name="message"></param>
+        /// <returns></returns>
+        [HttpPost("SendMessageWithFlyToLatLongRPi")]
+        public async Task<IActionResult> SendMessageWithFlyToLatLongRPi(string message)
+        {
+            try
+            {
+                await _droneService.SendMessageWithFlyToLatLongRPi(message);
+                return Ok("Message Sent to Raspberry Pi");
+            }
+            catch (Exception x)
+            {
+                return BadRequest(x);
+            }
+        }
     }
 }
