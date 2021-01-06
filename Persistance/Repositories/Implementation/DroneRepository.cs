@@ -116,7 +116,7 @@ namespace Persistance.Repositories.Implementation
                     .WithTopic("topic/manual_flight")
                     .WithPayload(message)
                     .WithQualityOfServiceLevel(MqttQualityOfServiceLevel.ExactlyOnce)
-                    .WithRetainFlag(true)
+                    .WithRetainFlag(false)
                     .Build());
 
                 return true;
@@ -137,28 +137,10 @@ namespace Persistance.Repositories.Implementation
                     .WithTopic("topic/fly_to")
                     .WithPayload(message)
                     .WithQualityOfServiceLevel(MqttQualityOfServiceLevel.ExactlyOnce)
-                    .WithRetainFlag(true)
+                    .WithRetainFlag(false)
                     .Build());
 
                 return true;
-            }
-            catch (Exception x)
-            {
-                throw new Exception(x.Message, x.InnerException);
-            }
-        }
-
-        public async Task<string> ReceiveMessageFromDroneTopic()
-        {
-            try
-            {
-                var mqttClient = await _context.MqttClient;
-
-                var result = await mqttClient.SubscribeAsync(new TopicFilterBuilder()
-                    .WithTopic("topic/drones")
-                    .Build());
-
-                return result.Items.ToString();
             }
             catch (Exception x)
             {

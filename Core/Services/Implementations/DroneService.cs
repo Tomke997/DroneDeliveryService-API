@@ -127,17 +127,5 @@ namespace Application.Services.Implementations
                 throw new Exception(x.Message, x.InnerException);
             }
         }
-
-        public async Task<string> ReceiveMessageFromDroneTopic()
-        {
-            try
-            {
-                return await _droneRepository.ReceiveMessageFromDroneTopic();                
-            }
-            catch (Exception x)
-            {
-                throw new Exception(x.Message, x.InnerException);
-            }
-        }
     }
 }
