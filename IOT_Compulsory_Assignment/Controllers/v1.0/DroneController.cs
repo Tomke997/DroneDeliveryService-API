@@ -194,5 +194,24 @@ namespace WebApi.Controllers.v1._0
                 return BadRequest(x);
             }
         }
+
+        /// <summary>
+        /// Get drone data.
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet("ReceiveMessageFromDroneTopic")]
+        public async Task<IActionResult> ReceiveMessageFromDroneTopic()
+        {
+            try
+            {
+                string result = await _droneService.ReceiveMessageFromDroneTopic();
+
+                return Ok(result);
+            }
+            catch (Exception x)
+            {
+                return BadRequest(x);
+            }
+        }
     }
 }

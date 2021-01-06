@@ -13,5 +13,7 @@ namespace Persistance.Repositories.Interfaces
         Task<bool> SendMessageWithDirectionsRPi(string message);
 
         Task<bool> SendMessageWithFlyToLatLongRPi(string message);
+
+        Task<string> ReceiveMessageFromDroneTopic();
     }
 }

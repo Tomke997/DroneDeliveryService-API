@@ -147,5 +147,23 @@ namespace Persistance.Repositories.Implementation
                 throw new Exception(x.Message, x.InnerException);
             }
         }
+
+        public async Task<string> ReceiveMessageFromDroneTopic()
+        {
+            try
+            {
+                var mqttClient = await _context.MqttClient;
+
+                var result = await mqttClient.SubscribeAsync(new TopicFilterBuilder()
+                    .WithTopic("topic/drones")
+                    .Build());
+
+                return result.Items.ToString();
+            }
+            catch (Exception x)
+            {
+                throw new Exception(x.Message, x.InnerException);
+            }
+        }
     }
 }
